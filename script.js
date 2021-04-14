@@ -35,6 +35,56 @@ var pwdOptions = {
 var keys = Object.keys(pwdOptions);
 
 
+// get password length
+function getPasswordLength() {
+  var pwdLen;
+
+  pwdLen = parseInt(prompt("Password Length (8-128)?"));
+
+  // check that user enters a number and not other alpha/special chars
+  if (isNaN(pwdLen)) {
+    alert("Only a number between 8 and 128 is allowed for Password length.");
+    return false;
+  }
+  
+  // verify that user entered number in [8-128]
+  if (pwdLen < 8) {
+    alert("Minimum length for password is 8 charaters");
+    return false;    
+  }
+  if (pwdLen > 128) {
+    alert("Maximum length for password is 128 charaters");
+    return false;    
+  }
+  // if we came up to here then user entered correct length, update pwdOptions
+  pwdOptions.pwdLen = pwdLen;
+  return true;
+}
+
+
+// function to get pwd character option
+function getPasswordCharOptions(charType) {
+  var pwdCharPrompt = "Click OK to include ";
+  var answer = false;
+
+  if (charType == "specialChars") {
+    pwdCharPrompt += "Special Characters.";
+  }
+  else if (charType == "numberChars") {
+    pwdCharPrompt += "Numbers.";
+  }
+  else if (charType == "lowerCaseChars") {
+    pwdCharPrompt += "lower Case Characters.";
+  } 
+  else if (charType == "upperCaseChars") {
+    pwdCharPrompt += "UPPER Case Characters.";
+  } 
+  answer = confirm(pwdCharPrompt);
+  pwdOptions[charType] = answer;
+  // console.log(charType, answer);
+  return answer;
+}
+
 // show selected options at the bottom 
 function showOptions() {
   optionStr="Chosen Options: Length " + pwdOptions.pwdLen.toString();
