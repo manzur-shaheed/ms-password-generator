@@ -118,6 +118,14 @@ button[disabled] {
   overflow: hidden;
 }
 
+#options {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 16px;
+  text-align: center;
+  margin: 10px;
+}
+
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
