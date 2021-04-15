@@ -85,6 +85,81 @@ function getPasswordCharOptions(charType) {
   return answer;
 }
 
+
+// randomizer
+function getRandomChar(myArray) {
+  return myArray[Math.floor(Math.random() * myArray.length)];
+}
+
+// generate password from options
+function generatePasswordFromOptions() {
+  var charBean = [];
+  var chosenCharTypeBean = [];
+  var pwd = [];
+  var newPosition = 0
+  var password = "test";
+
+  // add charater sets based on selected options
+  // console.log(pwdOptions);
+  for (i=1; i<keys.length; i++) {
+    if (pwdOptions[keys[i]]) {
+      charBean = charBean.concat(eval(keys[i]));
+      // console.log(keys[i], charBean);
+      chosenCharTypeBean.push(getRandomChar(eval(keys[i])))
+    }
+  }
+  console.log(chosenCharTypeBean);
+
+  // fill in pwd array with random character from interested character set
+  for (i=0; i<pwdOptions.pwdLen; i++) {
+    pwd[i] = getRandomChar(charBean);
+  }
+
+  // insert characters from chosenCharTypeBean into random position in pwd
+  for (i=0; i<chosenCharTypeBean.length; i++) {
+    pwd[i] = chosenCharTypeBean[i];
+  }
+  
+  // verify length of generated password
+  if (pwd.length == pwdOptions.pwdLen) {
+    password = pwd.join('');
+  }
+
+  // finally return password
+  return password;
+}
+
+
+// function for character options
+function generatePassword() {
+  var password = "test";
+  var answer = false;
+
+  // prompt for password length, also no point proceeding further
+  // if password length is not in the range
+  if (getPasswordLength()) {
+    // prompt for options, iterate from 1 to len(keys), exclude 0 as 
+    // that is pwd length and already covered above
+    oneOptionSelected = false;
+    for (i=1; i<keys.length; i++) {
+      // console.log(keys[i]);
+      answer = getPasswordCharOptions(keys[i]);
+      oneOptionSelected = oneOptionSelected || answer;
+    }
+    
+    // user must select one character type option
+    if (oneOptionSelected) {
+      // generate password
+      password = generatePasswordFromOptions();
+    }
+    else {
+      alert("You must select at least one of the prompted character types.")
+    }
+  }
+  return password;
+}
+
+
 // show selected options at the bottom 
 function showOptions() {
   optionStr="Chosen Options: Length " + pwdOptions.pwdLen.toString();
