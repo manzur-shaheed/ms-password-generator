@@ -7,6 +7,7 @@ This tool generates secure password for a given length. Minimum - requirement is
 
 ## Getting Started
 Code at: [github link](https://github.com/manzur-shaheed/ms-password-generator)
+
 Live at: [github pages](https://manzur-shaheed.github.io/ms-password-generator/)
 
 You can clone code from [github link](https://github.com/manzur-shaheed/ms-password-generator) and run it locally on your computer.
