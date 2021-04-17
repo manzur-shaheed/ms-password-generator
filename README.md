@@ -44,7 +44,11 @@ once you enter correct length between 8-128 inclusive, it will prompt you a seri
 
 ![one_char](./assets/images/one_char.png)
 
-- If you meet all requirement, a secure password will be gerated and displayed in the main window ![output](./assets/images/output.png) It also display what options you chose at the bottom of the window (yellow &#8594;).
+- If you meet all requirement, a secure password will be gerated and displayed in the main window 
+
+![output](./assets/images/output.png) 
+
+It also display what options you chose at the bottom of the window (yellow &#8594;).
 
 - If you fail to meet password generation criteria, it will display the reason for the failure (yellow &#8594;) 
 
