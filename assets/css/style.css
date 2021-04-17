@@ -118,7 +118,7 @@ button[disabled] {
   overflow: hidden;
 }
 
-#options {
+#options, #msg {
   font-family: 'Times New Roman', Times, serif;
   font-style: italic;
   font-size: 16px;

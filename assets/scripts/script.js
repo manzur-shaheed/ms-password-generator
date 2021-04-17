@@ -1,5 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var optionText = document.querySelector("#options");
+var msgText = document.querySelector("#msg");
 
 // different arrays -
 var specialChars = ['@', '%', '+', '\\', '/', "'", '!', '#', '$', '^', '?',
@@ -25,7 +27,7 @@ fillUpperCaseArray();
 
 // variable for password options, with some default values
 var pwdOptions = {
-  pwdLen: 8,
+  pwdLen: length,
   specialChars: false,
   numberChars: false,
   lowerCaseChars: false,
@@ -40,24 +42,29 @@ function getPasswordLength() {
   var pwdLen;
 
   pwdLen = parseInt(prompt("Password Length (8-128)?"));
+  // assign value so we can see it in the 'Chosen Options' field, 
+  // what we entered even if it is wrong
+  pwdOptions.pwdLen = pwdLen;
 
   // check that user enters a number and not other alpha/special chars
   if (isNaN(pwdLen)) {
     alert("Only a number between 8 and 128 is allowed for Password length.");
+    msgText.innerHTML = "Failed: Only a number between 8 and 128 is allowed for Password length."
     return false;
   }
   
   // verify that user entered number in [8-128]
   if (pwdLen < 8) {
-    alert("Minimum length for password is 8 charaters");
+    alert("Minimum length for password is 8 charaters.");
+    msgText.innerHTML = "Failed: Minimum length for password is 8 charaters."
     return false;    
   }
   if (pwdLen > 128) {
-    alert("Maximum length for password is 128 charaters");
+    alert("Maximum length for password is 128 charaters.");
+    msgText.innerHTML = "Failed: Maximum length for password is 128 charaters."
     return false;    
   }
   // if we came up to here then user entered correct length, update pwdOptions
-  pwdOptions.pwdLen = pwdLen;
   return true;
 }
 
@@ -149,11 +156,13 @@ function generatePassword() {
     
     // user must select one character type option
     if (oneOptionSelected) {
-      // generate password
+      // generate password and also clear any failed msgs
       password = generatePasswordFromOptions();
+      msgText.innerHTML = ''
     }
     else {
       alert("You must select at least one of the prompted character types.")
+      msgText.innerHTML = "Failed: You must select at least one of the prompted character types."
     }
   }
   return password;
@@ -181,14 +190,12 @@ function showOptions() {
 // Write password to the #password input
 function writePassword() {
   var passwordText = document.querySelector("#password");
-  var optionText = document.querySelector("#options");
 
   passwordText.value = generatePassword();
   if (password != "test") {
     optionText.innerHTML = showOptions();
   }
 }
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
